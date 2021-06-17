@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const ThoughtList = ({ thoughts, title }) => { // thoughts component will receive two props: title, and thought array
     // destructured so we don't have to do props.title and props.thoughts the whole time
     if (!thoughts.length) { // check if any data in thoughts array and return h3 if so
@@ -11,15 +13,24 @@ const ThoughtList = ({ thoughts, title }) => { // thoughts component will receiv
             // which data needs to be re-rendered if something changes
                 <div key={thought._id} className="card mb-3"> 
                     <p className="card-header">
+                        <Link
+                        to={`/profile/${thought.username}`}
+                        style={{ fontWeight: 700 }}
+                        className="text-light"
+                        >
                         {thought.username}
+                        </Link>{' '}
                         thought on {thought.createdAt}
                     </p>
                     <div className="card-body">
-                        <p>{thought.thoughtText}</p>
-                        <p className="mb-0"> 
+                        <Link to={`/thought/${thought._id}`}>
+                            <p>{thought.thoughtText}</p>
+                            <p className="mb-0">
+                        
                             Reactions: {thought.reactionCount} || Click to{' '} 
                             {thought.reactionCount ? 'see' : 'start'} the discussion!
                         </p> 
+                        </Link>
                     </div> 
 
         </div>
